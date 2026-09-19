@@ -84,3 +84,31 @@
 证据：【截图待补：console-integration.png、console-practice.png】
 
 > 说明：所有降级提示都是"发现并如实报告问题"，没有为了 Console 干净而注释掉报错代码。
+
+## 七、W3C 标准校验（对应选做研究任务 3）
+
+用 validator.w3.org 的 Nu 校验器接口（`https://validator.w3.org/nu/?out=json`，Content-Type: text/html; charset=utf-8）逐个提交四个页面，结果：**0 error、0 warning**。
+
+| 页面 | 错误数 | 警告数 | 说明 |
+| --- | --- | --- | --- |
+| `integration/index.html` | 0 | 0 | 首轮即通过；`role`/`aria-label`、`label for` 与栅格嵌套均按规范写 |
+| `integration/three-d/scene.html` | 0 | 0 | 页内 `<style>` 与 `nav` 嵌套结构均合法 |
+| `practice/index.html` | 0 | 0 | `<caption class="caption-top">` 与表格 `scope` 属性按规范写 |
+| `practice/three-d/scene.html?id=3` | 0 | 0 | 查询字符串不影响校验 |
+
+复现命令（任一页面）：
+
+```bash
+curl -s -H "Content-Type: text/html; charset=utf-8" \
+  --data-binary "@practice/index.html" \
+  "https://validator.w3.org/nu/?out=json"
+```
+
+证据：【截图待补：W3C校验-integration.png、W3C校验-practice.png（浏览器打开 validator.w3.org/#validate_by_input 粘贴源码的通过页面）】
+
+## 八、遗留事项（下课前补齐）
+
+- 所有 `【截图待补】` 位置补真实截图，命名按 `screenshots/README.md`。
+- 三档宽度需在真机或 DevTools 设备模拟下逐张截，不要只截半屏。
+- `docs/peer-review.md` 的同伴意见与轮值协调四要素按当堂真实过程填写，并写对应 commit 号。
+
