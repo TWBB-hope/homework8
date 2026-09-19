@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>研究二·模式 A：普通（阻塞）脚本</title>
+</head>
+<body>
+<h1>mode = normal（脚本写在内容之前，不加 defer／async）</h1>
+<script src="js/measure.js"></script>
+<script>window.mark('① 解析到 body 开头');</script>
+<script src="js/slow-a.js"></script>
+<script src="js/slow-b.js"></script>
+<p id="late">② 这段文字在脚本之后：普通脚本会阻塞解析，脚本没跑完，这一行的位置也还没被解析出来。</p>
+<script>window.mark('③ 解析到 #late 之后');</script>
+<div id="result"></div>
+<script>
+window.addEventListener('load', function () {
+  window.mark('④ load 事件');
+  window.report('normal');
+});
+</script>
+</body>
+</html>

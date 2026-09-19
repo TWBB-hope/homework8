@@ -63,6 +63,18 @@ main {
   margin-bottom: .5rem;
 }
 
+/* ---- Lighthouse 可访问性修复（研究一）：.text-secondary（#6c757d）在本页背景 #f5f7f6 上
+       对比度 4.35:1，低于 WCAG AA 的 4.5:1；改 CSS 变量一次性覆盖所有次要文字（说明段、
+       列表计数、数据来源、预约提示），并把写死颜色的高级按钮单独调整。 ---- */
+:root {
+  --bs-secondary-rgb: 77, 91, 102; /* #4d5b66 → 对比度 6.5:1 */
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: #4d5b66;
+  --bs-btn-border-color: #6b7984;
+}
+
 .venue-footer {
   background-color: #e6eae8;
   color: #414a45;

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>研究二：script 标签 defer／async 与文档解析顺序</title>
+<style>
+  body { font-family: system-ui, "Microsoft YaHei", sans-serif; margin: 1.5rem; color: #21262a; }
+  table { border-collapse: collapse; margin-top: .75rem; width: 100%; }
+  th, td { border: 1px solid #cfd6da; padding: .4rem .55rem; font-size: .88rem; text-align: left; }
+  th { background: #eef3f5; }
+  .note { background: #fff7e6; border-left: 4px solid #d9a441; padding: .6rem .8rem; font-size: .9rem; }
+  .off { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  h2 { font-size: 1.05rem; margin-top: 1.6rem; }
+</style>
+</head>
+<body>
+<h1>研究二：defer／async 对加载与执行顺序的影响</h1>
+<p>测试方法：两个测试脚本 <code>slow-a.js</code>（约 1.5 MB、执行忙等 90 ms，扮演大库）与 <code>slow-b.js</code>（几 KB、执行 10 ms），
+分别用「普通」「defer」「async」三种方式引入同一个页面，页面在四个时刻打点（① body 开头、② 脚本之后的正文、③ 该段之后、④ load）。
+三种模式依次串行运行，避免并行争抢带宽造成误差；数值取两轮中的稳定一轮。
+<a href="mode-normal.html">mode-normal.html</a>｜<a href="mode-defer.html">mode-defer.html</a>｜<a href="mode-async.html">mode-async.html</a></p>
+
+<div class="note">结论速览：<strong>defer</strong> 下载与解析并行、且严格按文档顺序在解析结束后执行；<strong>async</strong> 下载与解析并行、但谁先下载完谁先执行，顺序不保证；<strong>不加属性</strong>时脚本会阻塞解析，后面的正文与 <code>#late</code> 都要等脚本执行完才出现。本项目把三个第三方库放在 <code>&lt;/body&gt;</code> 之前按依赖顺序引入、自己的 <code>app.js</code> 用 <code>defer</code>，就是为了既不阻塞首屏又保住“库在前、我在后”的顺序。</div>
+
+<h2>实测数据（本地服务器 python -m http.server，Chrome 内核）</h2>
+<div id="out">测试中……</div>
+
+<h2>Network 面板对照（截图占位）</h2>
+<p>【截图待补：研究二-network-normal.png（slow-a 请求期间解析被阻塞，页面内容延后）】<br>
+【截图待补：研究二-network-defer.png（请求与 HTML 解析并行，Waterfall 上DOMContentLoaded 早于两个脚本的执行间隙）】<br>
+【截图待补：研究二-network-async.png（slow-b 先于 slow-a 执行完成）】</p>
+
+<div id="holder" class="off"></div>
+
+<script>
+(function () {
+  const modes = ['normal', 'defer', 'async'];
+  const results = {};
+  const holder = document.getElementById('holder');
+
+  function render() {
+    const rows = modes.map(function (m) {
+      const r = results[m];
+      if (!r) return '<tr><td>' + m + '</td><td colspan="4">未取到</td></tr>';
+      const at = function (i) { const x = r.marks[i]; return x ? x.t + ' ms' : '—'; };
+      return '<tr><td>' + m + '</td>' +
+        '<td>' + at(0) + '</td>' +
+        '<td>' + at(1) + '</td>' +
+        '<td>' + at(2) + '</td>' +
+        '<td>' + r.order.map(function (o) { return o.name.split('（')[0] + '@' + o.t; }).join(' → ') + '</td>' +
+        '<td>' + r.order.map(function (o) { return (o.late ? '是' : '否'); }).join('、') + '</td></tr>';
+    });
+    document.getElementById('out').innerHTML =
+      '<table><caption class="small">单位：毫秒，从各自页面时间原点起算</caption><thead><tr>' +
+      '<th>加载方式</th><th>① body 开头</th><th>③ 解析到脚本之后的正文</th><th>④ load</th><th>脚本执行顺序</th><th>执行时 #late 是否已存在</th>' +
+      '</tr></thead><tbody>' + rows.join('') + '</tbody></table>';
+  }
+
+  function run(index) {
+    if (index >= modes.length) { render(); return; }
+    const mode = modes[index];
+    window.addEventListener('message', function handler(e) {
+      if (!e.data || !e.data.mode) return;
+      window.removeEventListener('message', handler);
+      results[e.data.mode] = e.data;
+      holder.innerHTML = '';
+      run(index + 1);
+    });
+    const frame = document.createElement('iframe');
+    frame.src = 'mode-' + mode + '.html';
+    frame.setAttribute('title', mode + ' 模式测试页');
+    holder.appendChild(frame);
+  }
+
+  run(0);
+})();
+</script>
+</body>
+</html>

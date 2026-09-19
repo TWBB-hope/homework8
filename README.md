@@ -13,6 +13,8 @@
 | `docs/peer-review.md` | 同伴审查记录（意见＋逐条处理：采纳／拒绝／修改）与轮值协调四要素记录表 | 必须完成任务 4、5 |
 | `docs/final-plan.md` | 期末大作业实施计划初稿：任务分解、时间表、风险清单三张表 | 必须完成任务 8 |
 | `docs/课堂实践进度报告八.docx` | 课堂实践进度报告八（Word，按模板十节填写） | 提交物·进度报告 |
+| `docs/submission-checklist.md` | 雨课堂提交清单（在哪里交、交什么、还差什么） | 提交要求 |
+| `research/` | 三项独立研究任务的实验页：Lighthouse 报告存档、`script-loading.html`（defer／async 对照实验）、W3C 校验记录，结论汇总在 `docs/research.md` | 独立研究任务（选做）1～3 |
 | `screenshots/` | 质量自查截图集（按 `screenshots/README.md` 的命名补充） | 提交物·截图集 |
 | `vendor/` | 第三方库的固定版本本地副本，CDN 不可达时自动兜底 | 断网可用 |
 | `homework-8.docx` / `student-guide-8.docx` | 教师下发的作业要求与实践指南原件 | — |

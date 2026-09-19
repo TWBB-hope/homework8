@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>研究二·模式 A：普通（阻塞）脚本</title>
+</head>
+<body>
+<h1>mode = defer（下载并行、解析不阻塞、按文档顺序执行）</h1>
+<script src="js/measure.js"></script>
+<script>window.mark('① 解析到 body 开头');</script>
+<script src="js/slow-a.js" defer></script>
+<script src="js/slow-b.js" defer></script>
+<p id="late">② 这段文字在脚本之后：脚本不再阻塞解析，脚本没跑完，加了 defer 后解析器会先把它解析出来。</p>
+<script>window.mark('③ 解析到 #late 之后');</script>
+<div id="result"></div>
+<script>
+window.addEventListener('load', function () {
+  window.mark('④ load 事件');
+  window.report('defer');
+});
+</script>
+</body>
+</html>

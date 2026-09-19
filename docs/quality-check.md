@@ -62,6 +62,7 @@
 | 表单 label | 所有 `select/input` 均有显式 `<label for>`（楼层、开放状态、名称关键字、场馆、时段、类型、空闲程度） | 【截图待补：表单label.png】 |
 | 颜色不作为唯一信息 | 拥挤度/占用除色块外同时给出文字"紧张/适中/宽松"与百分比数字；开闭馆状态用文字徽章而非仅颜色 | 【截图待补：颜色+文字.png】 |
 | Tab 键遍历 | 只用 Tab + 回车可完成：导航 → 楼层/状态/关键字 → 列表 → 预约表单（选场馆、选时段、提交）→ 取消按钮 → 三维链接；汉堡按钮也可 Tab 到达并展开 | 【截图待补：tab-focus顺序.png】 |
+| Lighthouse 审计（选做研究一） | 首轮 integration 95／practice 96，唯一失败项 color-contrast 共 8 处；修复对比度后 **两页面均 100，无失败项**，详见 `docs/research.md` 研究一 | `research/lighthouse/`（JSON 报告）＋【截图待补：Lighthouse-前后对比.png】 |
 
 ## 五、仓库与 README
 
