@@ -1,0 +1,80 @@
+/* 自定义样式：在 Bootstrap 之后引入，只补 Bootstrap 没有的部分 */
+
+:root {
+  --campus-primary: #2f6f8f;
+  --campus-accent: #c86b3c;
+}
+
+body {
+  background-color: #f6f7f9;
+  color: #23282d;
+}
+
+.campus-navbar {
+  background-color: var(--campus-primary);
+}
+
+.campus-navbar .nav-link {
+  border-radius: .375rem;
+  padding-left: .7rem;
+  padding-right: .7rem;
+}
+
+.campus-navbar .nav-link.active {
+  background-color: rgba(255, 255, 255, .18);
+  font-weight: 600;
+}
+
+main {
+  min-height: 60vh;
+}
+
+.module-card {
+  border-left: 4px solid var(--campus-primary);
+  transition: transform .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.module-card:hover,
+.module-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 .35rem .75rem rgba(31, 45, 61, .12);
+}
+
+.room-card {
+  border-color: #dfe3e8;
+}
+
+.chart-box {
+  width: 100%;
+  height: 300px; /* 图表容器必须有确定高度，否则 ECharts 画布高度为 0 不显示 */
+}
+
+.chart-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6c757d;
+  background-color: #eceff2;
+  border-radius: .375rem;
+  font-size: .875rem;
+}
+
+.campus-footer {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.scene-frame {
+  width: 100%;
+  height: 460px;
+  border: 1px solid #dfe3e8;
+  border-radius: .5rem;
+  background-color: #dfe8ee;
+}
+
+@media (max-width: 575.98px) {
+  .chart-box {
+    height: 240px;
+  }
+}
