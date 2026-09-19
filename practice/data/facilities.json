@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "校园运动场馆信息与预约看板",
+    "updatedAt": "2026-09-19",
+    "source": "课堂练习用虚构数据，不对应真实场馆与真实价格",
+    "unit": {
+      "occupancy": "今日已预约名额占比",
+      "pricePerHour": "元 / 小时",
+      "weekBookings": "人次 / 天"
+    }
+  },
+  "facilities": [
+    { "id": 1, "name": "北区体育馆羽毛球馆", "type": "球类", "area": "北区", "capacity": 48, "hours": "08:00-21:30", "pricePerHour": 30, "occupancy": 0.81, "bookable": true },
+    { "id": 2, "name": "北区体育馆乒乓球室", "type": "球类", "area": "北区", "capacity": 24, "hours": "08:00-21:30", "pricePerHour": 15, "occupancy": 0.42, "bookable": true },
+    { "id": 3, "name": "中心游泳馆 25 米池", "type": "水上", "area": "中心区", "capacity": 60, "hours": "12:00-20:30", "pricePerHour": 25, "occupancy": 0.93, "bookable": true },
+    { "id": 4, "name": "中心游泳馆训练池", "type": "水上", "area": "中心区", "capacity": 30, "hours": "07:00-09:00", "pricePerHour": 20, "occupancy": 0.27, "bookable": true },
+    { "id": 5, "name": "东区田径场跑道", "type": "田径", "area": "东区", "capacity": 300, "hours": "06:30-22:00", "pricePerHour": 0, "occupancy": 0.35, "bookable": false },
+    { "id": 6, "name": "东区篮球场（室外）", "type": "球类", "area": "东区", "capacity": 60, "hours": "06:30-22:00", "pricePerHour": 0, "occupancy": 0.88, "bookable": false },
+    { "id": 7, "name": "南区风雨操场综合馆", "type": "综合", "area": "南区", "capacity": 120, "hours": "08:30-21:00", "pricePerHour": 40, "occupancy": 0.56, "bookable": true },
+    { "id": 8, "name": "南区健身中心力量房", "type": "健身", "area": "南区", "capacity": 35, "hours": "09:00-22:00", "pricePerHour": 10, "occupancy": 0.74, "bookable": true },
+    { "id": 9, "name": "学生活动中心瑜伽室", "type": "健身", "area": "中心区", "capacity": 20, "hours": "18:00-21:00", "pricePerHour": 12, "occupancy": 0.15, "bookable": true },
+    { "id": 10, "name": "西区攀岩墙（维护中）", "type": "综合", "area": "西区", "capacity": 16, "hours": "暂停开放", "pricePerHour": 0, "occupancy": 0, "bookable": false }
+  ],
+  "week": [
+    { "day": "周一", "bookings": 268 },
+    { "day": "周二", "bookings": 302 },
+    { "day": "周三", "bookings": 345 },
+    { "day": "周四", "bookings": 318 },
+    { "day": "周五", "bookings": 402 },
+    { "day": "周六", "bookings": 511 },
+    { "day": "周日", "bookings": 463 }
+  ]
+}

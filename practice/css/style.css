@@ -1,0 +1,75 @@
+/* 自定义样式：在 Bootstrap 之后引入，只补 Bootstrap 没有的部分 */
+
+:root {
+  --venue-primary: #1f5f5b;
+  --venue-accent: #d0762d;
+}
+
+body {
+  background-color: #f5f7f6;
+  color: #21262a;
+}
+
+.venue-navbar {
+  background-color: var(--venue-primary);
+}
+
+.venue-navbar .nav-link {
+  border-radius: .375rem;
+  padding-left: .7rem;
+  padding-right: .7rem;
+}
+
+.venue-navbar .nav-link.active {
+  background-color: rgba(255, 255, 255, .18);
+  font-weight: 600;
+}
+
+main {
+  min-height: 60vh;
+}
+
+.summary-card {
+  border-top: 3px solid var(--venue-primary);
+}
+
+.venue-table th[scope="row"] {
+  font-weight: 500;
+}
+
+.venue-table td,
+.venue-table th {
+  vertical-align: middle;
+}
+
+.chart-box {
+  position: relative;
+  width: 100%;
+  height: 320px; /* Chart.js 需要容器有确定高度，否则画布高度为 0 */
+}
+
+.chart-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6c757d;
+  background-color: #eceff1;
+  border-radius: .375rem;
+  font-size: .875rem;
+}
+
+#messages .alert {
+  margin-bottom: .5rem;
+}
+
+.venue-footer {
+  background-color: #e6eae8;
+  color: #414a45;
+}
+
+@media (max-width: 575.98px) {
+  .chart-box {
+    height: 260px;
+  }
+}

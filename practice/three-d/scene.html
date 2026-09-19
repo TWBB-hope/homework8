@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>运动场馆三维导览 · 校园运动场馆看板</title>
+<meta name="description" content="课堂作业八自主实践：Three.js 校园运动场馆三维区，可旋转、缩放、点选场馆">
+<style>
+  body { margin: 0; font-family: system-ui, "Microsoft YaHei", sans-serif; color: #21262a; background: #f5f7f6; }
+  header { background: #1f5f5b; color: #fff; padding: .65rem 1rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: baseline; }
+  header a { color: #fff; }
+  main { padding: 1rem; max-width: 1100px; margin: 0 auto; }
+  #stage { width: 100%; height: 460px; background: linear-gradient(#d5e6e2, #eef4f2); border: 1px solid #dbe1df; border-radius: .5rem; overflow: hidden; }
+  #stage canvas { display: block; }
+  .panel { display: grid; gap: .35rem; margin: .75rem 0; font-size: .9rem; }
+  .hint { color: #6c757d; font-size: .85rem; }
+  .alert { background: #f8d7da; color: #842029; padding: .75rem 1rem; border-radius: .5rem; }
+  footer { padding: 1rem; color: #6c757d; font-size: .85rem; }
+</style>
+</head>
+<body>
+<header>
+  <strong>运动场馆三维导览</strong>
+  <span class="hint">校园运动场馆信息与预约看板 · 自主实践作品</span>
+  <nav aria-label="返回导航" style="margin-left:auto">
+    <a href="../index.html">&larr; 返回看板首页</a>
+  </nav>
+</header>
+
+<main>
+  <h1>场馆三维分布</h1>
+  <p>三维区用来回答“场馆在哪、长什么样、现在忙不忙”：点击任一建筑查看名称与今日占用，左键拖拽旋转视角，滚轮缩放。</p>
+  <div id="stage"></div>
+  <div class="panel">
+    <span>当前选中：<strong id="picked">无</strong></span>
+    <span id="detail">未在列表中选中场馆。</span>
+    <span class="hint">操作：左键拖拽旋转 / 滚轮缩放 / 点击选中</span>
+  </div>
+  <div id="fallback"></div>
+</main>
+
+<footer>建筑几何体与配色为课堂练习示意，不代表真实场馆外观；占用数据来自 data/facilities.json 的同名虚构数据。</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script>if (!window.THREE) document.write('<script src="../../vendor/three.min.js"><\/script>');</script>
+<script src="scene.js"></script>
+</body>
+</html>
