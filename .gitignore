@@ -1,3 +1,5 @@
 ~$*
-extracted.txt
 .DS_Store
+# 教师下发的原件保留在本地，不作为作业提交物纳入仓库
+homework-8.docx
+student-guide-8.docx

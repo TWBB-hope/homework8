@@ -232,7 +232,15 @@ function addBooking(facilityIdText, slot) {
     notify('warning', '最多保留 5 条练习预约，请先取消一条再添加。');
     return;
   }
-  list.push({ facilityId: facilityId, slot: slot, day: '本周', createdAt: new Date().toISOString().slice(0, 16).replace('T', ' ') });
+  const now = new Date();
+  list.push({
+    facilityId: facilityId,
+    slot: slot,
+    day: '本周',
+    createdAt: now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0')
+  });
   if (saveBookings(list)) {
     const facility = facilityById(facilityId);
     notify('success', '已添加预约：' + (facility ? facility.name : facilityId) + ' ' + slot + '。刷新页面后仍在。');

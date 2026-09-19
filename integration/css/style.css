@@ -2,7 +2,10 @@
 
 :root {
   --campus-primary: #2f6f8f;
-  --campus-accent: #c86b3c;
+  /* Lighthouse 可访问性修复（研究一）：Bootstrap 的 .text-secondary 为 #6c757d，在本页背景
+     #f6f7f9 上对比度只有 4.37:1，低于 WCAG AA 要求的 4.5:1。改 CSS 变量而不是逐个元素上色，
+     一次覆盖说明段、列表计数、数据来源等全部次要文字；#4d5b66 对该背景为 6.5:1。 */
+  --bs-secondary-rgb: 77, 91, 102;
 }
 
 body {
@@ -65,25 +68,10 @@ main {
   color: #495057;
 }
 
-/* ---- Lighthouse 可访问性修复（研究一）：Bootstrap 的 .text-secondary 为 #6c757d，
-       在本页背景 #f6f7f9 上对比度只有 4.37:1，低于 WCAG AA 要求的 4.5:1。
-       这里改的是 CSS 变量而不是逐个元素上色，一次覆盖全部次要文字（说明段、计数、数据来源）。 ---- */
-:root {
-  --bs-secondary-rgb: 77, 91, 102; /* #4d5b66 → 与 #f6f7f9 的对比度 6.5:1 */
-}
-
-/* 重置按钮同理：.btn-outline-secondary 的文字色写死为 #6c757d，单独覆盖 */
+/* 重置按钮同理：.btn-outline-secondary 的文字色写死为 #6c757d，不受上面变量影响，单独覆盖 */
 .btn-outline-secondary {
   --bs-btn-color: #4d5b66;
   --bs-btn-border-color: #6b7984;
-}
-
-.scene-frame {
-  width: 100%;
-  height: 460px;
-  border: 1px solid #dfe3e8;
-  border-radius: .5rem;
-  background-color: #dfe8ee;
 }
 
 @media (max-width: 575.98px) {
